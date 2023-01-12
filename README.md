@@ -21,10 +21,13 @@ create database ordenes
 2. En el archivo applicaction.properties modificar las credendiales de la Base de Datos y tener disponible puerto 9003 que es donde correrá el Backend
 
 spring.datasource.url=jdbc:postgresql://localhost:5433/ordenes
+
 spring.datasource.username=postgres
+
 spring.datasource.password=postgres
 
 spring.jpa.hibernate.ddl-auto=update
+
 server.port=9003
 
 3. Tener instalado Apache NetBeans 16
