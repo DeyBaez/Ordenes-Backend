@@ -7,6 +7,7 @@ package com.altioracorp.ordenes.service;
 import com.altioracorp.ordenes.exceptions.ResourceNotFoundException;
 import com.altioracorp.ordenes.model.Articulo;
 import com.altioracorp.ordenes.repository.ArticuloRepository;
+import com.altioracorp.ordenes.repository.OrdenDetalleRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

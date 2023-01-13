@@ -4,6 +4,7 @@
  */
 package com.altioracorp.ordenes.service;
 
+import com.altioracorp.ordenes.exceptions.ResourceNotStock;
 import com.altioracorp.ordenes.model.Articulo;
 import com.altioracorp.ordenes.model.Orden;
 import com.altioracorp.ordenes.model.OrdenDetalle;
@@ -37,11 +38,17 @@ public class OrdenServiceImpl implements OrdenService{
     public Orden save(Orden orden){
         List<OrdenDetalle> detalles = new ArrayList<>();
         for(OrdenDetalle d : orden.getOrdenDetalles()){
+            int auxStock;
             OrdenDetalle detalle = new OrdenDetalle(d.getNombre(), d.getCantidad(), d.getPrecioUnitario(), d.getTotal(), orden, d.getIdProduct());
             detalles.add(detalle);
             Articulo articulo = articuloRepository.findById(d.getIdProduct()).get();
-            articulo.setStock(articulo.getStock()- d.getCantidad());
-            articuloRepository.save(articulo);
+            auxStock = articulo.getStock()- d.getCantidad();
+            if(auxStock < 0){
+                throw new ResourceNotStock(("No existen productos disponibles"));
+            }else{
+                articulo.setStock(articulo.getStock()- d.getCantidad());
+                articuloRepository.save(articulo);
+            }
         }
         orden.setOrdenDetalles(detalles);
         return ordenRepository.save(orden);
