@@ -4,6 +4,7 @@
  */
 package com.altioracorp.ordenes.service;
 
+import com.altioracorp.ordenes.dto.ClienteDto;
 import com.altioracorp.ordenes.model.Cliente;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import java.util.Optional;
  */
 public interface ClienteService {
     
-    public List<Cliente> getAll();
+    public List<ClienteDto> getAll();
     public Optional<Cliente> getByIdentificacion(String identidicacion);
     public Cliente save(Cliente cliente);
     public void update(Cliente cliente);

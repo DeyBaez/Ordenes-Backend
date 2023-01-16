@@ -1,5 +1,6 @@
 package com.altioracorp.ordenes.controller;
 
+import com.altioracorp.ordenes.dto.ClienteDto;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ClienteController {
     private ClienteServiceImpl clienteService;
 
     @GetMapping("/getAll")
-    public List<Cliente> getAll() {
+    public List<ClienteDto> getAll() {
         return clienteService.getAll();
     }
     

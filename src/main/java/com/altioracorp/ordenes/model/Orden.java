@@ -1,5 +1,6 @@
 package com.altioracorp.ordenes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -10,7 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,15 +33,20 @@ public class Orden {
 
     @OneToMany(mappedBy = "orden",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrdenDetalle> ordenDetalles;
-
+    
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Cliente cliente;
+    
     public Orden() {
     }
 
-    public Orden(Long id, Date fecha, String nombreCliente, List<OrdenDetalle> ordenDetalles) {
+    public Orden(Long id, Date fecha, String nombreCliente, List<OrdenDetalle> ordenDetalles, Cliente cliente) {
         this.id = id;
         this.fecha = fecha;
         this.nombreCliente = nombreCliente;
         this.ordenDetalles = ordenDetalles;
+        this.cliente = cliente;
     }
 
     public Long getId() {
@@ -72,7 +81,13 @@ public class Orden {
         this.ordenDetalles = ordenDetalles;
     }
 
-    
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     
 

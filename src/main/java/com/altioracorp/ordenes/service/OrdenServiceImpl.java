@@ -7,12 +7,12 @@ package com.altioracorp.ordenes.service;
 import com.altioracorp.ordenes.exceptions.ResourceNotStock;
 import com.altioracorp.ordenes.model.Articulo;
 import com.altioracorp.ordenes.model.Orden;
+import com.altioracorp.ordenes.model.Cliente;
 import com.altioracorp.ordenes.model.OrdenDetalle;
 import com.altioracorp.ordenes.repository.ArticuloRepository;
 import com.altioracorp.ordenes.repository.OrdenRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +50,8 @@ public class OrdenServiceImpl implements OrdenService{
                 articuloRepository.save(articulo);
             }
         }
+        Cliente cliente = orden.getCliente();
+        orden.setCliente(cliente);
         orden.setOrdenDetalles(detalles);
         return ordenRepository.save(orden);
     }
